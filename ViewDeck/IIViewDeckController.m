@@ -3017,10 +3017,14 @@ static NSTimeInterval durationToAnimate(CGFloat pointsToAnimate, CGFloat velocit
     }
 }
 
-//Added by Redbooth to show always light status bar
+//Added by Redbooth: adding support for iOS7 status bar style
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    if ([self.centerController respondsToSelector:@selector(preferredStatusBarStyle)]) {
+        return [self.centerController preferredStatusBarStyle];
+    }else{
+        return UIStatusBarStyleLightContent;
+    }
 }
 
 - (void)setAutomaticallyUpdateTabBarItems:(BOOL)automaticallyUpdateTabBarItems {
